@@ -1,0 +1,12 @@
+staticmap
+haversine
+jutge
+networkx
+matplotlib
+pandas
+pep8
+python-telegram-bot
+geopy
+
+
+## With the command 'pip3 install -r requirements.txt', all the libraries should be installed.
