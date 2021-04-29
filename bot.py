@@ -153,20 +153,13 @@ dispatcher = updater.dispatcher
 dispatcher.add_handler(CommandHandler('start', start, pass_user_data=True))
 dispatcher.add_handler(CommandHandler('help', help_))
 dispatcher.add_handler(CommandHandler('authors', authors))
-dispatcher.add_handler(CommandHandler(
-    'graph', graph, pass_user_data=True, pass_args=True))
-dispatcher.add_handler(CommandHandler(
-    'plotgraph', plotgraph, pass_user_data=True))
-dispatcher.add_handler(CommandHandler(
-    'nodes', number_nodes, pass_user_data=True))
-dispatcher.add_handler(CommandHandler(
-    'edges', number_edges, pass_user_data=True))
-dispatcher.add_handler(CommandHandler(
-    'components', connex_components, pass_user_data=True))
-dispatcher.add_handler(CommandHandler(
-    'route', route, pass_user_data=True, pass_args=True))
-dispatcher.add_handler(CommandHandler(
-    'distribute', distribute, pass_user_data=True, pass_args=True))
+dispatcher.add_handler(CommandHandler('graph', graph, pass_user_data=True, pass_args=True))
+dispatcher.add_handler(CommandHandler('plotgraph', plotgraph, pass_user_data=True))
+dispatcher.add_handler(CommandHandler('nodes', number_nodes, pass_user_data=True))
+dispatcher.add_handler(CommandHandler('edges', number_edges, pass_user_data=True))
+dispatcher.add_handler(CommandHandler('components', connex_components, pass_user_data=True))
+dispatcher.add_handler(CommandHandler('route', route, pass_user_data=True, pass_args=True))
+dispatcher.add_handler(CommandHandler('distribute', distribute, pass_user_data=True, pass_args=True))
 
 ''' Starts up the bot.'''
 updater.start_polling()
