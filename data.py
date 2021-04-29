@@ -10,7 +10,7 @@ from geopy.geocoders import Nominatim
 
 
 ''' Returns a graph with all the nodes corresponding to the stations of the Bicing company in Barcelona,
-downloaded from the url below, and all the edges between nodes at distance <= dist.
+downloaded from the URL below, and all the edges between nodes at distance <= dist.
 Its cost is quadratic.'''
 def CreateGraph_nn(dist=1000):
     url = 'https://api.bsmsa.eu/ext/api/bsm/gbfs/v2/en/station_information'
@@ -56,7 +56,7 @@ def new_edge(G, dist, node, elem):
 
 
 ''' Returns a graph with all the nodes corresponding to the stations of the Bicing company in Barcelona,
-downloaded from the url below, and all the edges between nodes at distance <= dist.
+downloaded from the URL below, and all the edges between nodes at distance <= dist.
 Its cost is nlogn.'''
 def CreateGraph_nlogn(dist=1000):
     url = 'https://api.bsmsa.eu/ext/api/bsm/gbfs/v2/en/station_information'
@@ -67,7 +67,7 @@ def CreateGraph_nlogn(dist=1000):
     for st in bicing.itertuples():
         coord1 = (st.lat, st.lon)
         G.add_node(coord1)
-    # We found the bounding box that contains all the nodes of the graph and divide it in subsquares, as explained in class.
+    # We find the bounding box that contains all the nodes of the graph and divide it into subsquares, as explained in class.
     min_x, min_y, max_x, max_y = bbox(G)
     total_weight = haversine((min_x, min_y), (max_x, min_y))
     total_height = haversine((min_x, min_y), (min_x, max_y))
@@ -92,10 +92,10 @@ def CreateGraph_nlogn(dist=1000):
                 # We look at the nodes in the same subsquare.
                 for elem in d[casella]:
                     G = new_edge(G, dist, node, elem)
-                # We look at the nodes in right subsquare.
+                # We look at the nodes in the right subsquare.
                 for elem in d[casella+1]:
                     G = new_edge(G, dist, node, elem)
-                # We look at the nodes in the below subsquare.
+                # We look at the nodes in the bottom subsquare.
                 for elem in d[casella+cols]:
                     G = new_edge(G, dist, node, elem)
                 # We look at the nodes in the up-right subsquare.
@@ -107,7 +107,7 @@ def CreateGraph_nlogn(dist=1000):
                 # We look at the nodes in the same subsquare.
                 for elem in d[casella]:
                     G = new_edge(G, dist, node, elem)
-                # We look at the nodes in right subsquare.
+                # We look at the nodes in the right subsquare.
                 for elem in d[casella+1]:
                     G = new_edge(G, dist, node, elem)
                 # We look at the nodes in the up-right subsquare.
@@ -127,7 +127,7 @@ def CreateGraph_nlogn(dist=1000):
             for node in d[casella]:
                 for elem in d[casella]:
                     G = new_edge(G, dist, node, elem)
-                # We look at the nodes in right subsquare.
+                # We look at the nodes in the right subsquare.
                 for elem in d[casella+1]:
                     G = new_edge(G, dist, node, elem)
                 # We look at the nodes in the below subsquare.
@@ -171,7 +171,7 @@ def edges(G):
 def components(G):
     return nx.number_connected_components(G)
 
-''' Given an adress, it translates it to its corresponding coordinates.'''
+''' Given an address, it translates it to its corresponding coordinates.'''
 def addressesTOcoordinates(addresses):
     try:
         geolocator = Nominatim(user_agent="bicing_bot")
@@ -182,8 +182,8 @@ def addressesTOcoordinates(addresses):
     except:
         return None
 
-''' Given two adresses, plots the minimum route between them.
-It also returns the expected time until the user arrives to the destination.'''
+''' Given two addresses, plots the minimum route between them.
+It also returns the expected time until the user arrives at the destination.'''
 def ShortestPath(G, adresses, user_image_path):
     coords = addressesTOcoordinates(adresses)
     if coords is None:
@@ -223,14 +223,14 @@ def index(G):
     return list
 
 
-''' Returns the route and the number of bikes that a hypothetical vehicle should carry in order to guarantee that
+''' Returns the route and the number of bikes that a hypothetical vehicle should carry to guarantee that
 every station of the Bicing company in Barcelona has 'n' bicycles and 'm' empty docks.'''
 def distribute(G2, requiredBikes, requiredDocks):
     url_status = 'https://api.bsmsa.eu/ext/api/bsm/gbfs/v2/en/station_status'
     bikes = pd.DataFrame.from_records(pd.read_json(
         url_status)['data']['stations'], index='station_id')
     G = nx.DiGraph()
-    G.add_node('TOP')  # The green node
+    G.add_node('TOP')  # The green node.
     demand = 0
     for st in bikes.itertuples():
         idx = st.Index
@@ -238,7 +238,7 @@ def distribute(G2, requiredBikes, requiredDocks):
             continue
         stridx = str(idx)
 
-        # The blue (s), black (g) and red (t) nodes of the graph
+        # The blue (s), black (g) and red (t) nodes of the graph.
         a_idx, n_idx, r_idx = 's'+stridx, 'g'+stridx, 't'+stridx
         G.add_node(g_idx)
         G.add_node(s_idx)
@@ -288,7 +288,7 @@ def distribute(G2, requiredBikes, requiredDocks):
     if not err:
         first = True
         totalkm = 0
-        # We update the status of the stations according to the calculated transportation of bicycles
+        # We update the status of the stations according to the calculated transportation of bicycles.
         for src in flowDict:
             if src[0] != 'g':
                 continue
