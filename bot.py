@@ -6,7 +6,7 @@ import os
 
 TOKEN = '881647707:AAHJuAV_jyipzKQCJGKnlfKqk21a-q62FVo'
 
-''' Iniciates the conversation with the Bot and, by default, creates a graph with d = 1000.'''
+''' Initiates the conversation with the Bot and, by default, creates a graph with d = 1000.'''
 def start(bot, update, user_data):
     name = update.message.chat.first_name
     message = "Hello, " + name + "!"
@@ -15,7 +15,7 @@ def start(bot, update, user_data):
     user_data['graph'] = G
 
 
-''' Prints all the name of all the possible commands and a short explanation in order to help the user run the bot.'''
+''' Prints all the names of all the possible commands and a short explanation to help the user run the bot.'''
 def help_(bot, update):
     message = 'This Bot answers textually and graphically (with maps) questions related to geometric graphs defined on the stations of the bicing of Barcelona. \n\
             It answers the following commands: \n\
@@ -75,7 +75,7 @@ def connex_components(bot, update, user_data):
     bot.send_message(chat_id=update.message.chat_id, text=c)
 
 
-''' Shows an image corresponding to a map, with the corresponding nodes (red) and edges(blue)'''
+''' Shows an image corresponding to a map, with the corresponding nodes (red) and edges(blue).'''
 def plotgraph(bot, update, user_data):
     try:
         path = str(update.message.chat.id) + '.png'
@@ -86,7 +86,7 @@ def plotgraph(bot, update, user_data):
         print("error")
 
 
-''' Concatenates all the words in one string'''
+''' Concatenates all the words in one string.'''
 def concatenate(args):
     paraula = args[0]
     n = len(args)
@@ -95,7 +95,7 @@ def concatenate(args):
     return paraula
 
 
-''' Given an hour, it decomposes it in hours, minutes and seconds, and returns this values in a string.'''
+''' Given an hour, it decomposes it in hours, minutes and seconds, and returns these values in a string.'''
 def hours_to_string(hour):
     seconds = hour*3600
     h = int(seconds//3600)
@@ -106,7 +106,7 @@ def hours_to_string(hour):
 
 
 ''' Given a route, shows an image corresponding to the shortest path between the origin and the destination.
-It also prints the expected time until the user arrives to the destination.'''
+It also prints the expected time until the user arrives at the destination.'''
 def route(bot, update, user_data, args):
     path1 = str(update.message.chat.id) + 'jm.png'
     p = concatenate(args)
@@ -122,7 +122,7 @@ def route(bot, update, user_data, args):
         bot.send_message(chat_id=update.message.chat_id, text=a)
 
 
-''' Prints the route and the number of bikes that a hypothetical vehicle should carry in order to guarantee that every station
+''' Prints the route and the number of bikes that a hypothetical vehicle should carry to guarantee that every station
 of the Bicing company in Barcelona has 'n' bicycles and 'm' empty docks.'''
 def distribute(bot, update, user_data, args):
     requiredBikes = int(args[0])
@@ -145,11 +145,11 @@ def distribute(bot, update, user_data, args):
         bot.send_message(chat_id=update.message.chat_id, text=message2)
 
 
-# Declares a constant with the access token that reads from token.txt
+''' Declares a constant with the access token that reads from token.txt.'''
 updater = Updater(token=TOKEN)
 dispatcher = updater.dispatcher
 
-# As soon as the bot receives a message with some of the commands bwlow, it will execute the corresponding function
+''' As soon as the bot receives a message with some of the commands below, it will execute the corresponding function.'''
 dispatcher.add_handler(CommandHandler('start', start, pass_user_data=True))
 dispatcher.add_handler(CommandHandler('help', help_))
 dispatcher.add_handler(CommandHandler('authors', authors))
@@ -168,5 +168,5 @@ dispatcher.add_handler(CommandHandler(
 dispatcher.add_handler(CommandHandler(
     'distribute', distribute, pass_user_data=True, pass_args=True))
 
-# Starts up the bot
+''' Starts up the bot.'''
 updater.start_polling()
