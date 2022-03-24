@@ -1,6 +1,6 @@
 # BicingBot
 
-This README describes the BicingBot project, which consists on the implementation of a Telegram Bot that answers commands related to geomentric graphs defined on the stations of the Bicing company in Barcelona, both textually and graphically (with maps). All the data regarding the stations is downloaded immediately. 
+The BicingBot project consists in the implementation of a Telegram Bot that answers commands related to geomentric graphs defined on the stations of the Bicing company in Barcelona, both textually and graphically (with maps). All the data regarding the stations is downloaded immediately. 
 
 ## Getting Started
 
